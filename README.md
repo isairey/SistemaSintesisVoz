@@ -193,7 +193,7 @@ Convierte espectrogramas Mel en audio reproducible.
 # 📂 Estructura del proyecto
 
 ```bash
-TransformerTTS/
+SistemaSintesisVoz/
 │
 ├── config/
 │   ├── training_config.yaml
@@ -267,7 +267,7 @@ dataset_folder/
 ## 1️⃣ Clonar repositorio
 
 ```bash
-git clone https://github.com/as-ideas/TransformerTTS.git
+git clone https://github.com/isairey/SistemaSintesisVoz.git
 ```
 
 ---
@@ -275,7 +275,7 @@ git clone https://github.com/as-ideas/TransformerTTS.git
 ## 2️⃣ Entrar al proyecto
 
 ```bash
-cd TransformerTTS
+cd SistemaSintesisVoz
 ```
 
 ---
@@ -457,11 +457,11 @@ git push origin feature/nueva-funcionalidad
 
 ---
 
-# 👨‍💻 Desarrollador original
+# 👨‍💻 Desarrollador
 
 <div align="center">
 
-## Francesco Cardinale
+## Isai Reyes . FullStack Developer
 
 Investigador y desarrollador enfocado en Deep Learning, Speech Synthesis y arquitecturas Transformer para generación de voz.
 
@@ -469,17 +469,7 @@ Investigador y desarrollador enfocado en Deep Learning, Speech Synthesis y arqui
 
 ---
 
-# 🙏 Agradecimientos
 
-A los proyectos y comunidades que inspiraron y contribuyeron al desarrollo:
-
-* MelGAN
-* HiFiGAN
-* WaveRNN
-* Mozilla TTS
-* TensorFlow Community
-
----
 
 # 🌟 Apoya el proyecto
 
