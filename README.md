@@ -1,204 +1,506 @@
+<div align="center">
+
+<img width="220" src="https://cdn-icons-png.flaticon.com/512/4712/4712109.png" />
+
+# 🎙️ TransformerTTS
+
+### Sistema de Síntesis de Voz basado en Transformers y TensorFlow 2 🚀
+
 <p align="center">
-    <br>
-    <img src="https://raw.githubusercontent.com/as-ideas/TransformerTTS/master/docs/transformer_logo.png" width="400"/>
-    <br>
+  <b>TransformerTTS</b> es una implementación moderna de Text-to-Speech (TTS) basada en arquitecturas Transformer no autoregresivas, diseñada para generar voz natural, rápida y controlable mediante redes neuronales profundas.
 </p>
 
-<h2 align="center">
-<p>A Text-to-Speech Transformer in TensorFlow 2</p>
-</h2>
+<p align="center">
+  <img src="https://img.shields.io/badge/TensorFlow-2.x-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white">
+  <img src="https://img.shields.io/badge/Transformer-TTS-blueviolet?style=for-the-badge">
+  <img src="https://img.shields.io/badge/Python-AI-3776AB?style=for-the-badge&logo=python&logoColor=white">
+  <img src="https://img.shields.io/badge/DeepLearning-Speech-green?style=for-the-badge">
+</p>
 
+<p align="center">
+  <a href="#-acerca-del-proyecto">Acerca</a> •
+  <a href="#-características">Características</a> •
+  <a href="#-arquitectura-del-sistema">Arquitectura</a> •
+  <a href="#-tecnologías-utilizadas">Tecnologías</a> •
+  <a href="#-instalación">Instalación</a>
+</p>
 
-Implementation of a non-autoregressive Transformer based neural network for Text-to-Speech (TTS). <br>
-This repo is based, among others, on the following papers:
-- [Neural Speech Synthesis with Transformer Network](https://arxiv.org/abs/1809.08895)
-- [FastSpeech: Fast, Robust and Controllable Text to Speech](https://arxiv.org/abs/1905.09263)
-- [FastSpeech 2: Fast and High-Quality End-to-End Text to Speech](https://arxiv.org/abs/2006.04558)
-- [FastPitch: Parallel Text-to-speech with Pitch Prediction](https://fastpitch.github.io/)
+</div>
 
-Our pre-trained LJSpeech model is compatible with the pre-trained vocoders:
-- [MelGAN](https://github.com/seungwonpark/melgan)
-- [HiFiGAN](https://github.com/jik876/hifi-gan)
+---
 
-(older versions are available also for [WaveRNN](https://github.com/fatchord/WaveRNN))
+# 🌌 Acerca del proyecto
 
-For quick inference with these vocoders, checkout the [Vocoding branch](https://github.com/as-ideas/TransformerTTS/tree/vocoding)
+**TransformerTTS** es una solución avanzada de síntesis de voz desarrollada con TensorFlow 2 que transforma texto en habla natural utilizando arquitecturas Transformer de última generación.
 
-#### Non-Autoregressive
-Being non-autoregressive, this Transformer model is:
-- Robust: No repeats and failed attention modes for challenging sentences.
-- Fast: With no autoregression, predictions take a fraction of the time.
-- Controllable: It is possible to control the speed and pitch of the generated utterance.
+El proyecto toma inspiración de investigaciones reconocidas como:
 
-## 🔈 Samples
+* Neural Speech Synthesis with Transformer Network
+* FastSpeech
+* FastSpeech 2
+* FastPitch
 
-[Can be found here.](https://as-ideas.github.io/TransformerTTS/)
+Su diseño no autoregresivo permite una generación de voz significativamente más rápida que modelos tradicionales, manteniendo una alta calidad y estabilidad durante la inferencia.
 
-These samples' spectrograms are converted using the pre-trained [MelGAN](https://github.com/seungwonpark/melgan) vocoder.<br>
+---
 
+# ✨ Características
 
-Try it out on Colab:
+## 🎙️ Conversión Texto a Voz
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/as-ideas/TransformerTTS/blob/main/notebooks/synthesize_forward_melgan.ipynb)
+* Conversión de texto en audio natural
+* Síntesis neuronal de voz
+* Generación de espectrogramas Mel
+* Compatible con múltiples vocoders
+* Soporte para inferencia rápida
 
-## Updates
-- 06/20: Added normalisation and pre-trained models compatible with the faster [MelGAN](https://github.com/seungwonpark/melgan) vocoder.
-- 11/20: Added pitch prediction. Autoregressive model is now specialized as an Aligner and Forward is now the only TTS model. Changed models architectures. Discontinued WaveRNN support. Improved duration extraction with Dijkstra algorithm.
-- 03/20: Vocoding branch.
+---
 
-## 📖 Contents
-- [Installation](#installation)
-- [API](#pre-trained-ljspeech-api)
-- [Dataset](#dataset)
-- [Training](#training)
-    - [Aligner](#train-aligner-model)
-    - [TTS](#train-tts-model)
-- [Prediction](#prediction)
-- [Model Weights](#model-weights)
+## ⚡ Arquitectura No Autoregresiva
 
-## Installation
+* Mayor velocidad de inferencia
+* Eliminación de repeticiones
+* Atención más estable
+* Menor tiempo de procesamiento
+* Mejor escalabilidad
 
-Make sure you have:
+---
 
-* Python >= 3.6
+## 🎚️ Control de Voz
 
-Install espeak as phonemizer backend (for macOS use brew):
+* Control de velocidad de habla
+* Ajuste de tono (Pitch)
+* Duraciones personalizadas
+* Generación flexible de audio
+* Producción de voz más natural
+
+---
+
+## 🔊 Compatibilidad con Vocoders
+
+* MelGAN
+* HiFiGAN
+* WaveRNN (versiones anteriores)
+
+Permite transformar espectrogramas generados por el modelo en audio de alta calidad.
+
+---
+
+# 🧠 Arquitectura del sistema
+
+## 🤖 Aligner Model
+
+Módulo encargado de aprender la alineación entre texto y audio.
+
+### Funcionalidades
+
+* Extracción de duraciones
+* Alineación fonética
+* Procesamiento previo al entrenamiento
+* Optimización de sincronización
+
+---
+
+## 🎙️ Forward Transformer
+
+Modelo principal encargado de la síntesis de voz.
+
+### Funcionalidades
+
+* Generación de espectrogramas Mel
+* Predicción de pitch
+* Control de velocidad
+* Producción de voz paralela
+
+---
+
+## 🔊 Vocoder Layer
+
+Convierte espectrogramas Mel en audio reproducible.
+
+### Compatibilidad
+
+* MelGAN
+* HiFiGAN
+* Griffin-Lim
+* WaveRNN
+
+---
+
+# 🚀 Ventajas del modelo
+
+## ⚡ Fast Speech Generation
+
+* Inferencia paralela
+* Baja latencia
+* Producción eficiente
+
+---
+
+## 🛡️ Robustez
+
+* Menos errores de atención
+* Menos repeticiones
+* Mejor estabilidad
+
+---
+
+## 🎛️ Controlabilidad
+
+* Modificación del pitch
+* Control de duración
+* Ajuste de velocidad
+
+---
+
+# 🛠️ Tecnologías utilizadas
+
+## 🤖 Inteligencia Artificial
+
+<p>
+  <img src="https://skillicons.dev/icons?i=tensorflow,python" />
+</p>
+
+* TensorFlow 2
+* Deep Learning
+* Transformers
+* Neural Networks
+
+---
+
+## 🎵 Procesamiento de Audio
+
+* Mel Spectrograms
+* Speech Synthesis
+* Vocoders
+* Audio Reconstruction
+
+---
+
+## 🧰 Herramientas
+
+<p>
+  <img src="https://skillicons.dev/icons?i=git,github,vscode" />
+</p>
+
+* Git
+* GitHub
+* VS Code
+* TensorBoard
+
+---
+
+# 📂 Estructura del proyecto
+
+```bash
+TransformerTTS/
+│
+├── config/
+│   ├── training_config.yaml
+│
+├── data/
+│   ├── audio.py
+│   ├── metadata_readers.py
+│
+├── model/
+│   ├── factory.py
+│   ├── models.py
+│
+├── notebooks/
+│
+├── docs/
+│
+├── create_training_data.py
+├── train_aligner.py
+├── train_tts.py
+├── predict_tts.py
+├── extract_durations.py
+├── requirements.txt
+└── README.md
 ```
+
+---
+
+# 📚 Dataset
+
+## 🎵 LJSpeech Dataset
+
+El proyecto utiliza principalmente el conjunto de datos LJSpeech para entrenar modelos de síntesis de voz.
+
+### Contenido
+
+* Archivos WAV
+* Transcripciones
+* Metadatos
+* Información fonética
+
+---
+
+## 📂 Estructura esperada
+
+```bash
+dataset_folder/
+│
+├── metadata.csv
+└── wavs/
+    ├── file1.wav
+    ├── file2.wav
+    └── ...
+```
+
+---
+
+# ⚡ Instalación
+
+## 📋 Requisitos
+
+* Python 3.6+
+* TensorFlow 2
+* Git
+* Espeak
+* Pip
+
+---
+
+# 🚀 Configuración del proyecto
+
+## 1️⃣ Clonar repositorio
+
+```bash
+git clone https://github.com/as-ideas/TransformerTTS.git
+```
+
+---
+
+## 2️⃣ Entrar al proyecto
+
+```bash
+cd TransformerTTS
+```
+
+---
+
+## 3️⃣ Instalar Espeak
+
+Ubuntu/Debian:
+
+```bash
 sudo apt-get install espeak
 ```
 
-Then install the rest with pip:
+macOS:
+
+```bash
+brew install espeak
 ```
+
+---
+
+## 4️⃣ Instalar dependencias
+
+```bash
 pip install -r requirements.txt
 ```
 
-Read the individual scripts for more command line arguments.
+---
 
-## Pre-Trained LJSpeech API
-Use our pre-trained model (with Griffin-Lim) from command line with
-```commandline
-python predict_tts.py -t "Please, say something."
-```
-Or in a python script
-```python
-from data.audio import Audio
-from model.factory import tts_ljspeech
+# 🎓 Entrenamiento
 
-model = tts_ljspeech()
-audio = Audio.from_config(model.config)
-out = model.predict('Please, say something.')
+## Crear dataset de entrenamiento
 
-# Convert spectrogram to wav (with griffin lim)
-wav = audio.reconstruct_waveform(out['mel'].numpy().T)
-```
-
-You can specify the model step with the `--step` flag (CL) or `step` parameter (script).<br>
-Steps from 60000 to 100000 are available at a frequency of 5K steps (60000, 65000, ..., 95000, 100000).
-
-<b>IMPORTANT:</b> make sure to checkout the correct repository version to use the API.<br>
-Currently 493be6345341af0df3ae829de79c2793c9afd0ec
-
-## Dataset
-You can directly use [LJSpeech](https://keithito.com/LJ-Speech-Dataset/) to create the training dataset.
-
-#### Configuration
-* If training on LJSpeech, or if unsure, simply use ```config/training_config.yaml``` to create [MelGAN](https://github.com/seungwonpark/melgan) or [HiFiGAN](https://github.com/jik876/hifi-gan) compatible models
-    * swap the content of ```data_config_wavernn.yaml``` in ```config/training_config.yaml``` to create models compatible with [WaveRNN](https://github.com/fatchord/WaveRNN) 
-* **EDIT PATHS**: in `config/training_config.yaml` edit the paths to point at your dataset and log folders
-
-#### Custom dataset
-Prepare a folder containing your metadata and wav files, for instance
-```
-|- dataset_folder/
-|   |- metadata.csv
-|   |- wavs/
-|       |- file1.wav
-|       |- ...
-```
-if `metadata.csv` has the following format
-``` wav_file_name|transcription ```
-you can use the ljspeech preprocessor in ```data/metadata_readers.py```, otherwise add your own under the same file.
-
-Make sure that:
- -  the metadata reader function name is the same as ```data_name``` field in ```training_config.yaml```.
- -  the metadata file (can be anything) is specified under ```metadata_path``` in ```training_config.yaml``` 
-
-## Training
-Change the ```--config``` argument based on the configuration of your choice.
-### Train Aligner Model
-#### Create training dataset
 ```bash
 python create_training_data.py --config config/training_config.yaml
 ```
-This will populate the training data directory (default `transformer_tts_data.ljspeech`).
-#### Training
+
+---
+
+## Entrenar modelo Aligner
+
 ```bash
 python train_aligner.py --config config/training_config.yaml
 ```
-### Train TTS Model
-#### Compute alignment dataset
-First use the aligner model to create the durations dataset
+
+---
+
+## Extraer duraciones
+
 ```bash
 python extract_durations.py --config config/training_config.yaml
 ```
-this will add the `durations.<session name>` as well as the char-wise pitch folders to the training data directory.
-#### Training
+
+---
+
+## Entrenar modelo TTS
+
 ```bash
 python train_tts.py --config config/training_config.yaml
 ```
-#### Training & Model configuration
-- Training and model settings can be configured in `training_config.yaml`
 
-#### Resume or restart training
-- To resume training simply use the same configuration files
-- To restart training, delete the weights and/or the logs from the logs folder with the training flag `--reset_dir` (both) or `--reset_logs`, `--reset_weights`
+---
 
-#### Monitor training
+# 🎙️ Predicción
+
+## Desde línea de comandos
+
+```bash
+python predict_tts.py -t "Please, say something."
+```
+
+---
+
+## Con pesos personalizados
+
+```bash
+python predict_tts.py -t "Please, say something." -p /path/to/weights/
+```
+
+---
+
+# 📊 Monitoreo
+
+Visualizar métricas de entrenamiento mediante TensorBoard:
+
 ```bash
 tensorboard --logdir /logs/directory/
 ```
 
-![Tensorboard Demo](https://raw.githubusercontent.com/as-ideas/TransformerTTS/master/docs/tboard_demo.gif)
-## Prediction
-### With model weights
-From command line with
-```commandline
-python predict_tts.py -t "Please, say something." -p /path/to/weights/
+Permite monitorear:
+
+* Loss
+* Attention Maps
+* Training Progress
+* Learning Curves
+
+---
+
+# 🌟 Funcionalidades principales
+
+## 🎙️ Síntesis de voz neuronal
+
+* Text-to-Speech
+* Espectrogramas Mel
+* Generación paralela
+* Producción de audio natural
+
+---
+
+## 🤖 Inteligencia Artificial
+
+* Transformers
+* Deep Learning
+* Pitch Prediction
+* Duration Prediction
+
+---
+
+## 🔊 Audio de alta calidad
+
+* MelGAN
+* HiFiGAN
+* Griffin-Lim
+* Audio Reconstruction
+
+---
+
+# 🧠 Objetivos del proyecto
+
+## 🎯 Investigación y desarrollo
+
+* Síntesis de voz moderna
+* Modelos Transformer
+* Procesamiento de lenguaje natural
+* Deep Learning aplicado al audio
+* Generación de voz controlable
+* Producción de voz en tiempo real
+
+---
+
+# 🚧 Roadmap
+
+## 🔮 Próximas mejoras
+
+* 🌍 Soporte multilenguaje
+* 🎙️ Clonación de voz
+* 🤖 Integración con LLMs
+* ☁️ API en la nube
+* 📱 Aplicaciones móviles
+* ⚡ Inferencia optimizada GPU
+* 🧠 Fine-Tuning personalizado
+
+---
+
+# 🤝 Contribuciones
+
+Las contribuciones son bienvenidas ❤️
+
+## Cómo contribuir
+
+1. Fork del proyecto
+
+```bash
+git checkout -b feature/nueva-funcionalidad
 ```
-Or in a python script
-```python
-from model.models import ForwardTransformer
-from data.audio import Audio
-model = ForwardTransformer.load_model('/path/to/weights/')
-audio = Audio.from_config(model.config)
-out = model.predict('Please, say something.')
 
-# Convert spectrogram to wav (with griffin lim)
-wav = audio.reconstruct_waveform(out['mel'].numpy().T)
+2. Commit
+
+```bash
+git commit -m "✨ Nueva funcionalidad"
 ```
 
-## Model Weights
-Access the pre-trained models with the API call.
+3. Push
 
-Old weights
-| Model URL | Commit | Vocoder Commit|
-|---|---|---|
-|[ljspeech_tts_model](https://public-asai-dl-models.s3.eu-central-1.amazonaws.com/ljspeech_weights_tts.zip)| 0cd7d33 | aca5990 |
-|[ljspeech_melgan_forward_model](https://public-asai-dl-models.s3.eu-central-1.amazonaws.com/TransformerTTS/ljspeech_melgan_forward_transformer.zip)| 1c1cb03| aca5990 |
-|[ljspeech_melgan_autoregressive_model_v2](https://public-asai-dl-models.s3.eu-central-1.amazonaws.com/TransformerTTS/ljspeech_melgan_autoregressive_transformer.zip)| 1c1cb03| aca5990 |
-|[ljspeech_wavernn_forward_model](https://public-asai-dl-models.s3.eu-central-1.amazonaws.com/TransformerTTS/ljspeech_wavernn_forward_transformer.zip)| 1c1cb03| 3595219 |
-|[ljspeech_wavernn_autoregressive_model_v2](https://public-asai-dl-models.s3.eu-central-1.amazonaws.com/TransformerTTS/ljspeech_wavernn_autoregressive_transformer.zip)| 1c1cb03| 3595219 |
-|[ljspeech_wavernn_forward_model](https://public-asai-dl-models.s3.eu-central-1.amazonaws.com/TransformerTTS/ljspeech_forward_transformer.zip)| d9ccee6| 3595219 |
-|[ljspeech_wavernn_autoregressive_model_v2](https://public-asai-dl-models.s3.eu-central-1.amazonaws.com/TransformerTTS/ljspeech_autoregressive_transformer.zip)| d9ccee6| 3595219 |
-|[ljspeech_wavernn_autoregressive_model_v1](https://github.com/as-ideas/tts_model_outputs/tree/master/ljspeech_transformertts)| 2f3a1b5| 3595219 |
-## Maintainers
-* Francesco Cardinale, github: [cfrancesco](https://github.com/cfrancesco)
+```bash
+git push origin feature/nueva-funcionalidad
+```
 
-## Special thanks
-[MelGAN](https://github.com/seungwonpark/melgan) and [WaveRNN](https://github.com/fatchord/WaveRNN): data normalization and samples' vocoders are from these repos.
+4. Crear Pull Request 🚀
 
-[Erogol](https://github.com/erogol) and the Mozilla TTS team for the lively exchange on the topic.
+---
 
+# 👨‍💻 Desarrollador original
 
-## Copyright
-See [LICENSE](LICENSE) for details.
+<div align="center">
+
+## Francesco Cardinale
+
+Investigador y desarrollador enfocado en Deep Learning, Speech Synthesis y arquitecturas Transformer para generación de voz.
+
+</div>
+
+---
+
+# 🙏 Agradecimientos
+
+A los proyectos y comunidades que inspiraron y contribuyeron al desarrollo:
+
+* MelGAN
+* HiFiGAN
+* WaveRNN
+* Mozilla TTS
+* TensorFlow Community
+
+---
+
+# 🌟 Apoya el proyecto
+
+⭐ Dale una estrella
+
+🍴 Haz Fork
+
+📢 Comparte el proyecto
+
+🤝 Contribuye con mejoras
+
+---
+
+# 📜 Licencia
+
+Proyecto Open Source distribuido bajo licencia MIT para investigación, aprendizaje y desarrollo de sistemas avanzados de síntesis de voz basados en Inteligencia Artificial.
+
+---
+
+<div align="center">
+
+### 🎙️ TransformerTTS — Generando voces naturales con el poder de los Transformers 🚀
+
+</div>
